@@ -1,0 +1,53 @@
+CREATE TABLE favorites (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id       TEXT    UNIQUE NOT NULL,
+    type          TEXT    NOT NULL,
+    content       TEXT    NOT NULL,
+    datestamp     TEXT    NOT NULL
+);
+
+CREATE TABLE bookmarks (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id       TEXT    UNIQUE NOT NULL,
+    type          TEXT    NOT NULL,
+    content       TEXT    NOT NULL,
+    datestamp     TEXT    NOT NULL
+);
+
+CREATE TABLE history (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id       TEXT    UNIQUE NOT NULL,
+    type          TEXT    NOT NULL,
+    content       TEXT    NOT NULL,
+    datestamp     TEXT    NOT NULL
+);
+
+insertFavorite:
+INSERT OR IGNORE INTO favorites (item_id, type, content, datestamp)
+    VALUES (?, ?, ?, ?);
+
+deleteFavorite:
+DELETE FROM favorites WHERE item_id = ?;
+
+deleteFavorites:
+DELETE FROM favorites;
+
+selectAllFavorites:
+SELECT item_id, type, content, datestamp FROM favorites ORDER BY id DESC ;
+
+insertBookmark:
+INSERT OR IGNORE INTO bookmarks (item_id, type, content, datestamp)
+    VALUES (?, ?, ?, ?);
+
+deleteBookmark:
+DELETE FROM bookmarks WHERE item_id = ?;
+
+selectAllBookmarks:
+SELECT item_id, type, content, datestamp FROM bookmarks ORDER BY datetime(datestamp) DESC;
+
+insertHistory:
+INSERT OR REPLACE INTO history (item_id, type, content, datestamp)
+    VALUES (?, ?, ?, ?);
+
+selectAllHistory:
+SELECT item_id, type, content, datestamp FROM history ORDER BY datetime(datestamp) DESC;
