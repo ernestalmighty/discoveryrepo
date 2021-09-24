@@ -16,7 +16,12 @@ repositories {
 }
 
 kotlin {
-    android()
+    android() {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+        publishLibraryVariants("release", "debug")
+    }
     js(LEGACY) {
         binaries.executable()
         browser {
@@ -25,10 +30,15 @@ kotlin {
             }
         }
     }
-    iosX64 {
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
+        System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
+        else -> ::iosX64
+    }
+
+    iosTarget("ios") {
         binaries {
             framework("discoveryrepo") {
-                baseName = "shared"
+                baseName = "discoveryrepo"
                 linkerOpts.add("-lsqlite3")
             }
         }
@@ -75,13 +85,13 @@ kotlin {
             }
         }
         val jsTest by getting
-        val iosX64Main by getting {
+
+        val iosMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:$ktorVersion")
                 implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
-        val iosX64Test by getting
     }
 }
 
