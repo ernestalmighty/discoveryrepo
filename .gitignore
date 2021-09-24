@@ -1,0 +1,6 @@
+/android/build/
+/browser/build/
+/build/
+/shared/build/
+/.gradle/
+/.idea/
