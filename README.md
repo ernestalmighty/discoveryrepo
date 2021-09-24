@@ -2,4 +2,4 @@
 KMP POC
 
 
-./gradlew build
+just run `./gradlew build`
