@@ -51,3 +51,7 @@ INSERT OR REPLACE INTO history (item_id, type, content, datestamp)
 
 selectAllHistory:
 SELECT item_id, type, content, datestamp FROM history ORDER BY datetime(datestamp) DESC;
+
+
+deleteBookmarks:
+DELETE FROM bookmarks;

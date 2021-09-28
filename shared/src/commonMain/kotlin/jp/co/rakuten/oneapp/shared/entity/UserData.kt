@@ -1,5 +1,6 @@
 package jp.co.rakuten.oneapp.shared.entity
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -54,12 +55,14 @@ sealed class DiscoveryApiWrapper {
         val timestamp: String
     ) : DiscoveryApiWrapper()
 
+    @Serializable
     data class ApiBookmarkWrapper(
         override val item: ApiItem,
         val service: ApiItem.ApiRakutenServiceInfo,
         val timestamp: String
     ) : DiscoveryApiWrapper()
 
+    @Serializable
     data class ApiHistoryWrapper(
         override val item: ApiItem,
         val timestamp: String

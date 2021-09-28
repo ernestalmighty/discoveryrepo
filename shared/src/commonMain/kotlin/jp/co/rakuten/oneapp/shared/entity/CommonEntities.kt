@@ -69,7 +69,6 @@ sealed class Item: HasItemTrackingInfo {
     ) : Item()
 
     @Serializable
-    @SerialName("rakuten_service")
     data class ServiceDetails(
         override val id: String,
         override val itemType: String,
