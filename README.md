@@ -1,6 +1,4 @@
 # discoveryrepo
-KMP POC
-
 
 just run `./gradlew build`
 
@@ -15,26 +13,10 @@ ios -> shared/build/fat-framework/debug/discovery.framework
 web -> shared/build/distributions/shared.js
 
 
-Network callls
+**How to use:**
 
-iOS: 
+*Android:*
 
-`let repo = DiscoveryViewModel.Factory().getiOSInstance()`
+after importing aar module, create an instance of the DiscoveryViewModel and use as follows:
 
-`1. one-app/disc/api/v2/feedtype?client_support_dynamic_feed_type=true`
-
-`repo.localRepository.fetchFeedTypes(accessToken: "[token]") { MainScreenType, Error in`
-   `// code here`
-`}`
-
-`2. one-app/disc/api/v2/discovery`
-
-`repo.localRepository.fetchTabData(accessToken: "[token]", feedType: "[feedType]") { Component, Error in`
-  `// code here`
-`}`
-
-`3. one-app/disc/api/v2/discovery`
-
-`repo.localRepository.fetchService(accessToken: "[token]", collectionId: "[collectionId]", version: "[version]", tabType: "[tabType]") { ServiceDetails, Error in`
-  `// code here`
-`}`
+<img width="652" alt="Screenshot 2021-09-29 at 9 07 27 AM" src="https://user-images.githubusercontent.com/20489695/135185877-8a2a3bcb-6084-4967-ae2f-1236c1d95ba6.png">
