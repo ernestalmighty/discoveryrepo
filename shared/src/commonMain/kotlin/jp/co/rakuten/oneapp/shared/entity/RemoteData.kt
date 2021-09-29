@@ -43,7 +43,7 @@ sealed class ApiItem {
         val imageUrl: String,
         val historyImage: String,
         val link: ApiLinks,
-        val tags: String?,
+        val tags: String? = null,
         val trackingInfo: ApiItemTrackingInfo
     ) : ApiItem()
 
@@ -155,6 +155,38 @@ data class ApiRecommendedServices(
     val title: String,
     val serviceCategories: List<ApiRecommendedServiceCategory>
 ) : ApiComponent()
+
+data class ApiBanner(
+    val imageUrl: String,
+    val bannerUrl: String,
+    val rat: ApiBannerRat
+)
+
+@Serializable
+@SerialName("banner_group")
+data class ApiTimeLimitedBanner(
+    val id: String,
+    val scrollable: Boolean,
+    val banners: List<ApiItem.ApiBannerItem>,
+    val trackingInfo: ApiTrackingInfo,
+    val type: String
+) : ApiComponent()
+
+@Serializable
+data class ApiBannerRat(
+    val targetEle: String,
+    val customParams: ApiBannerRatCustomParams
+)
+
+@Serializable
+data class ApiBannerRatCustomParams(
+    @SerialName("r_service_name")
+    val rServiceName: String,
+    @SerialName("banner_position")
+    val bannerPosition: String,
+    @SerialName("banner_id")
+    val bannerId: String
+)
 
 @Serializable
 data class ApiRecommendedServiceCategory(

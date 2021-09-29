@@ -76,13 +76,13 @@ class Repository(private val sqlDriver: SqlDriver,
 
     @Throws(Exception::class)
     suspend fun fetchRakutenServices(accessToken: String,
-                                     screenType: MainScreenType,
+                                     screenType: String,
                                      version: String): List<Item.ServiceDetails> {
         return api.fetchService(
             accessToken = accessToken,
             collectionId = "rakutenServiceList",
             version = version,
-            tabType = screenType.queryTag
+            tabType = screenType
         ).let {
             it as ApiRakutenServices
             it.toRakutenServices().services
@@ -91,13 +91,13 @@ class Repository(private val sqlDriver: SqlDriver,
 
     @Throws(Exception::class)
     suspend fun fetchMiniApps(accessToken: String,
-                              screenType: MainScreenType,
+                              screenType: String,
                               version: String): List<Item.MiniApp> {
         return api.fetchService(
             accessToken = accessToken,
             collectionId = "miniAppList",
             version = version,
-            tabType = screenType.queryTag
+            tabType = screenType
         ).let {
             it as ApiMiniApps
             it.toMiniAppCollection().miniApps
@@ -106,14 +106,14 @@ class Repository(private val sqlDriver: SqlDriver,
 
     @Throws(Exception::class)
     suspend fun fetchMiniApps(accessToken: String,
-                              screenType: MainScreenType,
+                              screenType: String,
                               partnerType: String,
                               version: String): List<Item.PartnerItem> {
         return api.fetchService(
             accessToken = accessToken,
             collectionId = partnerType,
             version = version,
-            tabType = screenType.queryTag
+            tabType = screenType
         ).let {
             it as ApiPartners
             it.toPartners().partners
@@ -168,6 +168,8 @@ class Repository(private val sqlDriver: SqlDriver,
         db.discoveryDatabaseQueries.deleteBookmark(serviceId)
 
     fun deleteBookmarks(): Unit = db.discoveryDatabaseQueries.deleteBookmarks()
+
+    fun deleteFavorites(): Unit = db.discoveryDatabaseQueries.deleteFavorites()
 
     fun getBookmarks(): List<BookmarkDetails> =
         db.discoveryDatabaseQueries.selectAllBookmarks(::toBookmarkWrapper).executeAsList()

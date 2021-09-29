@@ -18,6 +18,7 @@ fun ApiComponent.toComponent(): Component? = when (this) {
     is ApiPartners -> this.toPartners()
     is ApiAlbum -> this.toAlbum()
     is ApiCarousel -> this.toCarousel()
+    is ApiTimeLimitedBanner -> this.toTimeLimitedBanner()
     is ApiUnknownComponent -> null
 }
 
@@ -210,6 +211,13 @@ fun ApiCarousel.toCarousel(): Carousel {
         trackingInfo = trackingInfo.toTrackingInfo()
     )
 }
+
+fun ApiTimeLimitedBanner.toTimeLimitedBanner() = TimeLimitedBanner(
+    title = id,
+    autoScrollable = scrollable,
+    banners = banners.map { it.toBannerItem() },
+    trackingInfo = trackingInfo.toTrackingInfo()
+)
 
 @ExperimentalSerializationApi
 fun ApiItem.ApiBannerItem.toBannerItem() = BannerItem(

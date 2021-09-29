@@ -136,6 +136,8 @@ sealed class Item: HasItemTrackingInfo {
         val isSaved: Boolean = false
     ) : Item(), HasHistory
 
+    @Serializable
+    @SerialName("banner")
     data class BannerItem(
         override val id: String,
         val title: String,
