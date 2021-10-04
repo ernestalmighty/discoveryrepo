@@ -109,3 +109,44 @@ sqldelight {
         packageName = "jp.co.rakuten.oneapp.shared.local"
     }
 }
+
+tasks {
+    val libName = "discoveryrepo"
+    register("buildDebugXCFramework", Exec::class.java) {
+        description = "Create a Debug XCFramework"
+
+        dependsOn("link${libName}DebugFrameworkIosArm64")
+        dependsOn("link${libName}DebugFrameworkIosX64")
+
+        val arm64FrameworkPath = "$rootDir/build/bin/iosArm64/${libName}DebugFramework/${libName}.framework"
+        val arm64DebugSymbolsPath = "$rootDir/build/bin/iosArm64/${libName}DebugFramework/${libName}.framework.dSYM"
+
+        val x64FrameworkPath = "$rootDir/build/bin/iosX64/${libName}DebugFramework/${libName}.framework"
+        val x64DebugSymbolsPath = "$rootDir/build/bin/iosX64/${libName}DebugFramework/${libName}.framework.dSYM"
+
+        val xcFrameworkDest = File("$rootDir/../kmp-xcframework-dest/$libName.xcframework")
+        executable = "xcodebuild"
+        args(mutableListOf<String>().apply {
+            add("-create-xcframework")
+            add("-output")
+            add(xcFrameworkDest.path)
+
+            // Real Device
+            add("-framework")
+            add(arm64FrameworkPath)
+            add("-debug-symbols")
+            add(arm64DebugSymbolsPath)
+
+            // Simulator
+            add("-framework")
+            add(x64FrameworkPath)
+            add("-debug-symbols")
+            add(x64DebugSymbolsPath)
+        })
+
+        doFirst {
+            xcFrameworkDest.deleteRecursively()
+        }
+    }
+}
+

@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'shared'
     spec.version                  = '1.0-SNAPSHOT'
-    spec.homepage                 = 'https://github.com/ernestalmighty/discoveryrepo'
-    spec.source                   = { :git => "https://github.com/ernestalmighty/discoveryrepo.git", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
-    spec.authors                  = { "ernestalmighty" => "ernestgayyed@gmail.com" }
-    spec.license                  = { :type => "MIT", :file => "LICENSE" }
+    spec.homepage                 = ''
+    spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
+    spec.authors                  = ''
+    spec.license                  = ''
     spec.summary                  = ''
 
     spec.static_framework         = true

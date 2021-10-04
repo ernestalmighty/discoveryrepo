@@ -6,7 +6,6 @@ import jp.co.rakuten.oneapp.shared.entity.*
 import jp.co.rakuten.oneapp.shared.local.DiscoveryViewModel
 import jp.co.rakuten.oneapp.shared.local.Repository
 import jp.co.rakuten.oneapp.shared.local.getInstance
-import jp.co.rakuten.oneapp.shared.local.provideDBDriver
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -97,8 +96,6 @@ class MainActivity : AppCompatActivity() {
         disco.repository.forceCrash()
 
         MainScope().launch {
-
-            val test = Repository(provideDBDriver())
             // Bookmarks
             disco.repository.deleteBookmarks()
             val bookmarkItem = disco.repository.saveBookmark(CAROUSEL_ITEM)
