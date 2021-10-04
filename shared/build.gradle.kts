@@ -46,7 +46,7 @@ kotlin {
 
     val coroutinesVersion = "1.5.0-native-mt"
     val serializationVersion = "1.2.2"
-    val ktorVersion = "1.6.1"
+    val ktorVersion = "1.6.3"
     val sqlDelightVersion: String by project
 
     sourceSets {
@@ -81,7 +81,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation("com.squareup.sqldelight:sqljs-driver:1.5.0")
-                implementation("io.ktor:ktor-client-js:1.6.1")
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
             }
         }
         val jsTest by getting

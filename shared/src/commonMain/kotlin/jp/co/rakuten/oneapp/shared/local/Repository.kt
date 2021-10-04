@@ -208,6 +208,10 @@ class Repository(private val sqlDriver: SqlDriver,
                     }
                 }
             }
+
+    fun forceCrash() {
+        throw RuntimeException("test a crash")
+    }
 }
 
 private val jsonConfiguration = Json {
